@@ -1,0 +1,12 @@
+streamlit
+pandas
+matplotlib
+seaborn
+plotly
+scikit-learn
+sentence-transformers
+gensim
+jellyfish
+statsmodels
+scipy
+numpy
