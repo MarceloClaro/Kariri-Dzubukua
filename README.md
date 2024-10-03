@@ -1,107 +1,104 @@
 # Kariri-Dzubukua
-Este estudo apresenta uma análise comparativa entre três idiomas: Dzubukuá (uma língua extinta), Português Arcaico e Português Moderno.
-
-### Projeto de Análise Linguística Trilingue
-
-Este repositório contém um projeto modular voltado para a análise de similaridades linguísticas entre o **Dzubukuá**, o **Português Arcaico** e o **Português Moderno**. Utilizamos técnicas avançadas de **Processamento de Linguagem Natural (PLN)**, estatística descritiva e inferencial, e métodos de visualização de dados para realizar análises semânticas, lexicais e fonológicas entre esses idiomas.
 
 ---
 
-## Estrutura do Projeto
+Este projeto realiza uma **análise linguística trilingue** entre **Dzubukuá**, **Português Arcaico**, e **Português Moderno**, utilizando técnicas avançadas de **Processamento de Linguagem Natural (PLN)**, **estatísticas descritivas e inferenciais**, e **visualização de dados**. A seguir, está uma descrição detalhada da estrutura do código e das funcionalidades implementadas.
 
-A organização modular do projeto permite a fácil integração, extensão e manutenção do código, com a divisão das responsabilidades entre os módulos de processamento, análise, estatística, e visualização. Abaixo está uma visão detalhada da estrutura e da função de cada módulo:
+---
+
+## Estrutura Modular do Projeto
+
+A organização modular permite uma fácil manutenção e extensão do código, com cada módulo responsável por uma parte específica da análise. Segue a estrutura do projeto:
 
 ```bash
 projeto/
 │
-├── app.py  # Arquivo principal que integra todos os módulos e a interface do Streamlit
+├── app.py  # Integração do código com Streamlit, a interface do usuário
 ├── data/
-│   └── carrega_dados.py  # Funções para carregar e preparar os dados
+│   └── carrega_dados.py  # Funções relacionadas ao carregamento e tratamento dos dados
 ├── processing/
-│   ├── similaridade_semantica.py  # Funções para cálculos com Sentence-BERT e similaridade de cosseno
-│   ├── similaridade_lexical.py    # Funções para cálculos com Word2Vec, N-gramas e coeficiente de Sorensen-Dice
-│   ├── similaridade_fonologica.py # Funções para Soundex e Distância de Levenshtein
+│   ├── similaridade_semantica.py  # Implementa Sentence-BERT e similaridade de cosseno
+│   ├── similaridade_lexical.py    # Implementa Word2Vec, N-gramas e coeficiente de Sorensen-Dice
+│   ├── similaridade_fonologica.py # Implementa Soundex e Distância de Levenshtein
 ├── analysis/
-│   ├── correlacoes_pearson.py  # Cálculo da correlação de Pearson
-│   ├── correlacoes_spearman.py # Cálculo da correlação de Spearman
-│   ├── correlacoes_kendall.py  # Cálculo da correlação de Kendall
+│   ├── correlacoes_pearson.py  # Cálculo de correlações de Pearson
+│   ├── correlacoes_spearman.py # Cálculo de correlações de Spearman
+│   ├── correlacoes_kendall.py  # Cálculo de correlações de Kendall
 │   ├── regressao_linear.py     # Funções para regressão linear simples
 │   ├── regressao_multipla.py   # Funções para regressão múltipla
-│   ├── anova.py                # Funções para análise de variância (ANOVA)
+│   ├── anova.py                # Funções para análise ANOVA
 ├── statistics/
-│   ├── estatistica_descritiva.py  # Funções para média, mediana, moda, variância e desvio padrão
+│   ├── estatistica_descritiva.py  # Funções para média, mediana, variância, desvio padrão, etc.
 │   ├── margens_erro.py           # Cálculo de margens de erro e intervalos de confiança
 │   ├── testes_hipotese.py        # Testes de hipóteses estatísticas
 ├── math/
-│   ├── funcoes_matematicas.py  # Funções matemáticas gerais para o projeto
+│   ├── funcoes_matematicas.py  # Funções matemáticas gerais
 │   ├── ajustes_curvas.py       # Funções para ajustes de curvas
-│   ├── q_exponencial.py        # Funções para ajustes e modelagem com q-exponencial
+│   ├── q_exponencial.py        # Funções para ajuste q-exponencial
 ├── visualizations/
-│   ├── pca.py          # Funções para visualização com análise de componentes principais (PCA)
-│   ├── clustering.py   # Funções para análise de agrupamentos (clusters) com K-Means e DBSCAN
-│   ├── heatmaps.py     # Funções para geração de mapas de calor interativos
-│   └── dendrograma.py  # Funções para geração de dendrogramas de agrupamentos hierárquicos
+│   ├── pca.py          # Análise de Componentes Principais (PCA) e gráficos
+│   ├── clustering.py   # Análise de agrupamentos (clusters) com K-Means e DBSCAN
+│   ├── heatmaps.py     # Mapas de calor interativos
+│   └── dendrograma.py  # Geração de dendrogramas para análise hierárquica
 ├── utils/
-│   ├── salvar_dados.py  # Funções para salvar os resultados como CSV
-│   ├── estatisticas_utils.py  # Funções auxiliares para cálculos estatísticos
-│   └── ajustes.py       # Funções para ajustes matemáticos e correções
+│   ├── salvar_dados.py  # Funções para salvar os resultados em CSV
+│   ├── estatisticas_utils.py # Funções auxiliares para cálculos estatísticos
+│   └── ajustes.py       # Funções adicionais de ajustes matemáticos
 ```
 
 ---
 
-### Descrição dos Módulos
+### Descrição Detalhada dos Módulos
 
 #### `app.py`
-Este é o arquivo principal que integra todos os módulos do projeto. Ele utiliza o **Streamlit** para criar uma interface de usuário simples e interativa, onde o usuário pode fazer upload de dados e visualizar os resultados das análises em tempo real.
+Este arquivo é o ponto de entrada da aplicação **Streamlit**, que oferece uma interface interativa para o usuário. Ele permite o carregamento de dados, a execução das análises e a visualização dos resultados em tempo real.
 
 #### `data/carrega_dados.py`
-Contém as funções para carregar, limpar e preparar os dados utilizados nas análises. Esta etapa inclui a tokenização e normalização dos textos nas três línguas (Dzubukuá, Português Arcaico e Moderno).
+Contém funções para carregar, limpar e preparar os dados linguísticos. É responsável por garantir que as frases nas três línguas estejam devidamente organizadas para a análise.
 
 #### `processing/`
-Este diretório contém os módulos de processamento das diferentes formas de similaridade entre as línguas:
+Este diretório contém os módulos de processamento das diferentes formas de similaridade:
 
-- `similaridade_semantica.py`: Implementa o cálculo da **similaridade semântica** usando o **Sentence-BERT** e a **similaridade de cosseno** para medir a proximidade entre frases nas três línguas.
-- `similaridade_lexical.py`: Inclui funções para calcular a **similaridade lexical** usando **Word2Vec**, **N-gramas**, e o **coeficiente de Sorensen-Dice**.
-- `similaridade_fonologica.py`: Contém funções que utilizam o **Soundex** e a **Distância de Levenshtein** para medir a similaridade fonológica entre as palavras.
+- **`similaridade_semantica.py`**: Utiliza **Sentence-BERT** para calcular a similaridade semântica entre as frases das três línguas, baseando-se no cálculo da **similaridade de cosseno**.
+- **`similaridade_lexical.py`**: Implementa técnicas como **N-gramas**, **Word2Vec** e o **coeficiente de Sorensen-Dice** para medir a similaridade lexical.
+- **`similaridade_fonologica.py`**: Utiliza algoritmos como **Soundex** e a **Distância de Levenshtein** para medir a similaridade fonológica entre palavras.
 
 #### `analysis/`
-Este diretório é responsável pelas análises estatísticas:
+Módulos responsáveis por cálculos estatísticos e análises avançadas:
 
-- `correlacoes_pearson.py`: Calcula a correlação de Pearson entre variáveis.
-- `correlacoes_spearman.py`: Calcula a correlação de Spearman, útil para dados não lineares.
-- `correlacoes_kendall.py`: Calcula a correlação de Kendall para avaliar a concordância entre rankings.
-- `regressao_linear.py`: Implementa a **regressão linear simples**, mostrando a relação entre duas variáveis.
-- `regressao_multipla.py`: Contém funções para **regressão múltipla**, que modela a influência de várias variáveis independentes.
-- `anova.py`: Realiza a **análise de variância (ANOVA)** para verificar diferenças significativas entre grupos.
+- **`correlacoes_pearson.py`**, **`correlacoes_spearman.py`**, **`correlacoes_kendall.py`**: Cada módulo calcula correlações entre variáveis de interesse, utilizando diferentes métodos.
+- **`regressao_linear.py`**: Aplica modelos de regressão linear simples entre variáveis de similaridade.
+- **`regressao_multipla.py`**: Realiza regressão múltipla para entender como diferentes variáveis afetam a similaridade.
+- **`anova.py`**: Aplica a **análise de variância (ANOVA)** para comparar as médias das similaridades entre os três idiomas.
 
 #### `statistics/`
-Módulo dedicado às estatísticas descritivas e inferenciais:
+Responsável por cálculos estatísticos e análise de hipóteses:
 
-- `estatistica_descritiva.py`: Funções para calcular **média, mediana, variância, desvio padrão** e outras estatísticas descritivas.
-- `margens_erro.py`: Calcula **margens de erro** e **intervalos de confiança**, importantes para avaliar a precisão das estimativas.
-- `testes_hipotese.py`: Contém funções para realizar **testes de hipóteses estatísticas**, incluindo testes t e ANOVA.
+- **`estatistica_descritiva.py`**: Realiza cálculos de média, mediana, variância, desvio padrão, etc.
+- **`margens_erro.py`**: Calcula margens de erro e intervalos de confiança, úteis para entender a precisão das estimativas.
+- **`testes_hipotese.py`**: Executa testes de hipóteses para verificar a significância estatística.
 
 #### `math/`
-Inclui funções matemáticas gerais e específicas para ajustes:
+Inclui funções matemáticas e de ajuste de curvas:
 
-- `funcoes_matematicas.py`: Funções matemáticas auxiliares, como soma, produto, etc.
-- `ajustes_curvas.py`: Funções para ajuste de curvas com métodos de otimização.
-- `q_exponencial.py`: Modelagem e ajuste de distribuições com o **q-exponencial**, útil para dados não-lineares complexos.
+- **`funcoes_matematicas.py`**: Contém funções auxiliares para cálculos matemáticos.
+- **`ajustes_curvas.py`**: Implementa métodos de ajuste de curvas para modelagem de dados.
+- **`q_exponencial.py`**: Aplica o ajuste **q-exponencial**, relevante para sistemas complexos.
 
 #### `visualizations/`
-Este diretório contém funções para gerar diferentes tipos de visualizações gráficas:
+Este diretório contém funções para gerar visualizações:
 
-- `pca.py`: Realiza a **análise de componentes principais (PCA)** e plota os resultados em gráficos 2D.
-- `clustering.py`: Funções para agrupar dados usando **K-Means** e **DBSCAN**, gerando visualizações de agrupamentos.
-- `heatmaps.py`: Gera **mapas de calor** interativos com base nas correlações entre variáveis.
-- `dendrograma.py`: Gera **dendrogramas** para visualização de agrupamentos hierárquicos.
+- **`pca.py`**: Implementa a **Análise de Componentes Principais (PCA)** para visualização de dados em duas dimensões.
+- **`clustering.py`**: Executa **K-Means** e **DBSCAN** para análise de agrupamentos.
+- **`heatmaps.py`**: Gera mapas de calor interativos com base nas correlações entre variáveis.
+- **`dendrograma.py`**: Gera dendrogramas para análise de agrupamentos hierárquicos.
 
 #### `utils/`
-Ferramentas auxiliares para salvar dados e ajustes:
+Contém funções utilitárias:
 
-- `salvar_dados.py`: Funções para salvar os resultados das análises em arquivos **CSV**.
-- `estatisticas_utils.py`: Funções auxiliares para cálculos estatísticos e validações.
-- `ajustes.py`: Funções para ajustes matemáticos gerais e correções de dados.
+- **`salvar_dados.py`**: Permite salvar os resultados das análises em arquivos **CSV**.
+- **`estatisticas_utils.py`**: Funções auxiliares para cálculos estatísticos.
+- **`ajustes.py`**: Contém funções adicionais para ajustes matemáticos.
 
 ---
 
@@ -128,18 +125,17 @@ Ferramentas auxiliares para salvar dados e ajustes:
 
 ### Funcionalidades Principais
 
-- **Análises Semânticas** com **Sentence-BERT** para medir similaridades de significado.
-- **Análises Lexicais** com **Word2Vec**, **N-gramas**, e o **coeficiente de Sorensen-Dice**.
-- **Análises Fonológicas** usando **Soundex** e **Distância de Levenshtein**.
-- **Regressão Linear e Múltipla**, **Correlação** (Pearson, Spearman, Kendall).
-- **Estatísticas Descritivas** e **Inferenciais**, incluindo testes de hipótese e ANOVA.
-- **Visualizações** como **PCA**, **Mapas de Calor**, **Clustering** e **Dendrogramas**.
+- **Análises Semânticas** com **Sentence-BERT** para medir similaridades de significado entre as frases.
+- **Análises Lexicais** com **Word2Vec**, **N-gramas**, e o **coeficiente de Sorensen-Dice** para avaliar a estrutura das palavras.
+- **Análises Fonológicas** usando **Soundex** e a **Distância de Levenshtein** para medir a similaridade sonora.
+- **Modelos Estatísticos** como **Correlação de Pearson, Spearman e Kendall**, **Regressão Linear e Múltipla**.
+- **Análise de Componentes Principais (PCA)** e **Agrupamentos (Clustering)** com visualizações interativas.
 
 ---
 
 ### Contribuições
 
-Sinta-se à vontade para enviar **pull requests** ou abrir **issues** se encontrar bugs ou tiver sugestões de melhorias. Este projeto é de código aberto e será melhorado com a ajuda da comunidade.
+Sinta-se à vontade para contribuir com o projeto enviando **pull requests** ou abrindo **issues** se encontrar problemas ou tiver sugestões de melhorias.
 
 ---
 
